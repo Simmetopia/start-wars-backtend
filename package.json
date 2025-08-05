@@ -22,9 +22,7 @@
     "graphql": "^16.10.0",
     "graphql-yoga": "5.15.1",
     "prisma": "^6.13.0",
-    "rollup": "^4.46.2"
-  },
-  "devDependencies": {
+    "rollup": "^4.46.2",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.4",
