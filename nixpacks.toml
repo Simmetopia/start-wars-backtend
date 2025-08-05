@@ -1,12 +1,29 @@
+# nixpacks.toml
+providers = ["...","node"]  # run the default node provider plus any you add
+
 [phases.setup]
-nixPkgs = ["nodejs", "openssl", "postgresql"]
+# extend the provider’s own nixPkgs instead of replacing them
+nixPkgs = ["...", "nodejs", "openssl", "postgresql"]
+# if you shell out usefully to curl/wget, you can extend apt too
+aptPkgs = ["...", "curl", "wget"]
 
 [phases.install]
-cmds = ["npm install"]
+dependsOn = ["setup"]
+cmds = [
+  "npm install"
+]
 
 [phases.build]
-cmds = ["npx prisma generate"]
+dependsOn = ["install"]
+cmds = [
+  # 1) generate Prisma client
+  "npx prisma generate",
+  # 2) compile your TypeScript/Rollup bundle
+  "npm run build"
+]
+cacheDirectories = ["node_modules/.cache"]
 
-[phases.start]
-cmds = ["npx prisma migrate deploy && npm run start:prod"]
-
+# this overrides *exactly* what your container will run at runtime
+[start]
+# first run any migrations, then launch the prod server
+cmd = "npx prisma migrate deploy && npm run start:prod"
