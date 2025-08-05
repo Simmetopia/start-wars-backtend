@@ -1,12 +1,12 @@
 [phases.setup]
-nixPkgs = ["nodejs", "openssl", "postgresql", "sqlite"]
+nixPkgs = ["nodejs", "openssl", "postgresql"]
 
 [phases.install]
 cmds = ["npm install"]
 
 [phases.build]
-cmds = ["npx prisma generate"]
+cmds = ["npx prisma generate", "npm run build"]
 
 [phases.start]
-cmds = ["npx prisma migrate deploy && npm run start"]
+cmds = ["npx prisma migrate deploy && npm run start:prod"]
 
