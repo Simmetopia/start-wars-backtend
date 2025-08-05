@@ -1,29 +1,28 @@
 # nixpacks.toml
-providers = ["...","node"]  # run the default node provider plus any you add
+
+# Tell Nixpacks to use Node 22
+[variables]
+NIXPACKS_NODE_VERSION = "22"
 
 [phases.setup]
-# extend the provider’s own nixPkgs instead of replacing them
-nixPkgs = ["...", "nodejs", "openssl", "postgresql"]
-# if you shell out usefully to curl/wget, you can extend apt too
-aptPkgs = ["...", "curl", "wget"]
+# Don’t re-include "nodejs" or "openssl"—the Node provider already did that.
+nixPkgs = ["postgresql"]
+# If you need curl/wget you can drop into apt instead:
+aptPkgs = ["curl", "wget"]
 
 [phases.install]
 dependsOn = ["setup"]
-cmds = [
-  "npm install"
-]
+cmds = ["npm install"]
 
 [phases.build]
 dependsOn = ["install"]
 cmds = [
-  # 1) generate Prisma client
   "npx prisma generate",
-  # 2) compile your TypeScript/Rollup bundle
   "npm run build"
 ]
 cacheDirectories = ["node_modules/.cache"]
 
-# this overrides *exactly* what your container will run at runtime
+# This is the _actual_ container entrypoint
 [start]
-# first run any migrations, then launch the prod server
 cmd = "npx prisma migrate deploy && npm run start:prod"
+
