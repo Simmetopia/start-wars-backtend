@@ -5,7 +5,7 @@ nixPkgs = ["nodejs", "openssl", "postgresql"]
 cmds = ["npm install"]
 
 [phases.build]
-cmds = ["npx prisma generate", "npm run build"]
+cmds = ["npx prisma generate"]
 
 [phases.start]
 cmds = ["npx prisma migrate deploy && npm run start:prod"]

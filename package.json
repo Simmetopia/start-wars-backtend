@@ -9,7 +9,7 @@
     "seed": "prisma migrate reset -f",
     "start": "node -r @swc-node/register src/server.ts",
     "build": "rollup -c",
-    "start:prod": "node dist/server.js",
+    "start:prod": "npm run build && node dist/server.js",
     "type": "tsc --noEmit"
   },
   "dependencies": {
