@@ -8,7 +8,7 @@
     "generate": "prisma generate",
     "seed": "prisma migrate reset -f",
     "start": "node -r @swc-node/register src/server.ts",
-    "build": "rollup -c",
+    "build": "npx rollup -c",
     "start:prod": "npm run build && node dist/server.js",
     "type": "tsc --noEmit"
   },
