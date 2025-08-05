@@ -21,7 +21,8 @@
     "@types/node": "^24.2.0",
     "graphql": "^16.10.0",
     "graphql-yoga": "5.15.1",
-    "prisma": "^6.13.0"
+    "prisma": "^6.13.0",
+    "rollup": "^4.46.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
