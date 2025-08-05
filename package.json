@@ -14,6 +14,7 @@
     "@pothos/core": ">=3.0.0",
     "@pothos/plugin-prisma": ">=3.0.0",
     "@prisma/client": "^6.13.0",
+    "@swc-node/register": "^1.10.10",
     "@types/node": "^24.2.0",
     "graphql": "^16.10.0",
     "graphql-yoga": "5.15.1",
